@@ -1,124 +1,122 @@
 
 import random
+import itertools
 
 
 
 def crearTablero (fila,columna):
-    print("hola")
-    tablero = []
+    listCasillas = []
     subLis = [0,0,0,0]
     tamano = fila * columna
     for i in range(tamano):
-        tablero.append(subLis)
-    llenarTablero(tablero)
-    return(tablero)
+        listCasillas.append(subLis)
+    llenarTablero(listCasillas,fila,columna)
+    return(listCasillas)
     
-
-    
-def llenarTablero(tablero):
-    c_negra = ["negra",0,0,0]
-    c_blanca = ["blanca",0,0,0]
-    tablero [0] = c_negra
-    tablero [1] = ["negra","none",3, "none"]
-    tablero [2] = ["negra","none",17, "none"] 
-    tablero [3] = ["negra",9,"none", "none"]   
-    tablero [4] = c_blanca
-    tablero [5] = c_blanca
-    tablero [6] = ["negra",11,"none", "none"]
-    tablero [7] = c_blanca
-    tablero [8] = c_blanca
-    evaluar(tablero)
-    #print(tablero)
-    #print(" ",m[0],m[1],m[2],"\n",m[3],m[4],m[5],"\n",m[6],m[7],m[8])
-    #recorrerTablero(tablero)
-
-    
-    
-
-'''
-def llenarTablero(tablero):
+def llenarTablero(listCasillas,fila,columna):
     c_negra = ["negra",0,0,0]
     c_blanca = ["blanca",0,0,0]
 
-    tablero [0] = c_negra
-    tablero [1] = ["negra","none",3, "none"]
-    tablero [2] = ["negra","none",20, "none"] 
-    tablero [3] = ["negra","none","none", "none"]   
-    tablero [4] = ["negra","none",10, "none"]
-    tablero [5] = ["negra","none",12, "none"]
-    tablero [6] = ["negra","none",3, "none"]
-    tablero [7] = c_negra
-    tablero [8] = ["negra", 9, "none", "none"]
-    tablero [9] = c_blanca
-    tablero [10] = c_blanca
-    tablero [11] = ["negra",13,"none", "none"]
-    tablero [12] = c_blanca
-    tablero [13] = c_blanca
-    tablero [14] = c_blanca
-    tablero [15] = c_negra
-    tablero [16] = ["negra",11,"none", "none"]
-    tablero [17] = c_blanca
-    tablero [18] = c_blanca
-    tablero [19] = ["negra",6,15, "none"]
-    tablero [20] = c_blanca
-    tablero [21] = c_blanca
-    tablero [22] = c_blanca
-    tablero [23] = c_negra
-    tablero [24] = c_negra
-    tablero [25] = ["negra",6,"none", "none"]
-    tablero [26] = c_blanca
-    tablero [27] = c_blanca
-    tablero [28] = c_blanca
-    tablero [29] = ["negra","none",13, "none"]
-    tablero [30] = c_negra
-    tablero [31] = c_negra
-    tablero [32] = c_negra
-    tablero [33] = ["negra","none",12, "none"]
-    tablero [34] = ["negra",31,4, "none"]
-    tablero [35] = c_blanca
-    tablero [36] = c_blanca
-    tablero [37] = c_blanca
-    tablero [38] = ["negra","none",3, "none"]
-    tablero [39] = c_negra
-    tablero [40] = ["negra",6,"none", "none"]
-    tablero [41] = c_blanca
-    tablero [42] = c_blanca
-    tablero [43] = c_blanca
-    tablero [44] = ["negra",4,"none", "none"]
-    tablero [45] = c_blanca
-    tablero [46] = c_blanca
-    tablero [47] = c_negra
-    tablero [48] = ["negra",16,"none", "none"]
-    tablero [49] = c_blanca
-    tablero [50] = c_blanca
-    tablero [51] = c_blanca
-    tablero [52] = ["negra",3,"none", "none"]
-    tablero [53] = c_blanca
-    tablero [54] = c_blanca
-    tablero [55] = c_negra
-    tablero [56] = c_negra
-    tablero [57] = c_negra
-    tablero [58] = c_negra
-    tablero [59] = c_negra
-    tablero [60] = c_negra
-    tablero [61] = c_negra
-    tablero [62] = c_negra
-    tablero [63] = c_negra
-    #print(tablero)
-    recorrerTablero(tablero)
+    listCasillas [0] = c_negra
+    listCasillas [1] = ["negra",-1,3, -1]
+    listCasillas [2] = ["negra",-1,20, -1] 
+    listCasillas [3] = ["negra",-1,-1, -1]   
+    listCasillas [4] = ["negra",-1,10, -1]
+    listCasillas [5] = ["negra",-1,12, -1]
+    listCasillas [6] = ["negra",-1,3, -1]
+    listCasillas [7] = c_negra
+    listCasillas [8] = ["negra", 9, -1, -1]
+    listCasillas [9] = c_blanca
+    listCasillas [10] = c_blanca
+    listCasillas [11] = ["negra",13,-1, -1]
+    listCasillas [12] = c_blanca
+    listCasillas [13] = c_blanca
+    listCasillas [14] = c_blanca
+    listCasillas [15] = c_negra
+    listCasillas [16] = ["negra",11,-1, -1]
+    listCasillas [17] = c_blanca
+    listCasillas [18] = c_blanca
+    listCasillas [19] = ["negra",6,15, -1]
+    listCasillas [20] = c_blanca
+    listCasillas [21] = c_blanca
+    listCasillas [22] = c_blanca
+    listCasillas [23] = c_negra
+    listCasillas [24] = c_negra
+    listCasillas [25] = ["negra",6,-1, -1]
+    listCasillas [26] = c_blanca
+    listCasillas [27] = c_blanca
+    listCasillas [28] = c_blanca
+    listCasillas [29] = ["negra",-1,13, -1]
+    listCasillas [30] = c_negra
+    listCasillas [31] = c_negra
+    listCasillas [32] = c_negra
+    listCasillas [33] = ["negra",-1,12, -1]
+    listCasillas [34] = ["negra",31,4, -1]
+    listCasillas [35] = c_blanca
+    listCasillas [36] = c_blanca
+    listCasillas [37] = c_blanca
+    listCasillas [38] = ["negra",-1,3, -1]
+    listCasillas [39] = c_negra
+    listCasillas [40] = ["negra",6,-1, -1]
+    listCasillas [41] = c_blanca
+    listCasillas [42] = c_blanca
+    listCasillas [43] = c_blanca
+    listCasillas [44] = ["negra",4,-1, -1]
+    listCasillas [45] = c_blanca
+    listCasillas [46] = c_blanca
+    listCasillas [47] = c_negra
+    listCasillas [48] = ["negra",16,-1, -1]
+    listCasillas [49] = c_blanca
+    listCasillas [50] = c_blanca
+    listCasillas [51] = c_blanca
+    listCasillas [52] = ["negra",3,-1, -1]
+    listCasillas [53] = c_blanca
+    listCasillas [54] = c_blanca
+    listCasillas [55] = c_negra
+    listCasillas [56] = c_negra
+    listCasillas [57] = c_negra
+    listCasillas [58] = c_negra
+    listCasillas [59] = c_negra
+    listCasillas [60] = c_negra
+    listCasillas [61] = c_negra
+    listCasillas [62] = c_negra
+    listCasillas [63] = c_negra
+    tablero = []
+    cont = 0
+    for i in range(0,fila):
+        temp = []
+        for j in range(0,columna):
+            temp.append(listCasillas[cont])
+            cont +=1
+        tablero.append(temp)
+    funcPrincipal(tablero,listCasillas)
     
     #accesarTablero(tablero)
-'''
+def funcPrincipal(tablero,listCasillas):
+    aux_tablero = []
+    for i in range(0,len(tablero)):
+        contB = 0 #cuantos son por fila blancos
+        indice = 0 #guardas la posicion negro
+        valorFila = 0
+        listaPoda = []
+        for j in range(0,len(tablero[0])):
+            if(tablero[i][j][0] == "negra"):
+                if(j < len(tablero[0])-1):
+                    valorFila = tablero[i][j][1]
+            else:
+                valorColumna = getSuma(tablero,i,j)
+                listaPoda = poda(tablero[i][j],valorFila,valorColumna)
+                aux_tablero.append([listaPoda,i,j])#posicion del tablero y los posibles
+    backTracking(aux_tablero,tablero)
+                    
 
-#func recursiva para acceder a los datos de subLista
-def accesarTablero(tablero):
-    for posicion in tablero:
-        if isinstance(posicion, list):
-            accesarTablero(posicion)
-        else:
-            print("\n\t","|",posicion,"|")
+def getSuma(tablero,i,j):
+    while(i >= 0 ):
+        if(tablero[i][j][0] == "negra"):
+            return tablero[i][j][2]#valor de columna
+        i-=1
 
-        
+
 def poda(posicion, debeSumarF, debeSumarC):
         l_posiblesF = crearListaPosibles(debeSumarF)
         conj_posiblesF = set(l_posiblesF)
@@ -128,23 +126,26 @@ def poda(posicion, debeSumarF, debeSumarC):
         
         interConj = conj_posiblesF.intersection(conj_posiblesC)
         listInterConj = list(interConj)
-        print("interList",listInterConj)
+        return listInterConj
                 
     #llamar backTrking
 
+#func recursiva para acceder a los datos de subLista
+def accesarTablero(tablero):
+    for posicion in tablero:
+        if isinstance(posicion, list):
+            accesarTablero(posicion)
+        else:
+            print("\n\t","|",posicion,"|")
     
 def crearListaPosibles(rango):
-    print("rango" + str(rango))
-    if(rango != 0):
+    if(rango > 0):
         lista = []
         num = 1
-        while(num <= rango-1):
+        while(num <= rango-1 and num <= 9):
             lista.append(num)
             num += 1
-            print (lista)
         return lista
-    else:
-        print("hola")
 
 #esta en mi funcion para recorrer el tablero, tengo que moverme por las casillas blancas
 def evaluar(tablero):
@@ -164,9 +165,62 @@ def evaluar(tablero):
     print("bakncas",blancas)
     return(blancas)
     
+def backTracking(aux_tablero,tablero):
+    fila = len(tablero)
+    #print(aux_tablero)
+    combinacionesF = []
+    i = 0
+    while(i < len(aux_tablero)):
+        listaBlancas = []
+        a = aux_tablero[i]
+        listaBlancas.append(aux_tablero[i][0]) #lista posibles para la suma de esa fila
+        indice = aux_tablero[i][2] # posicion
+        p = i+1
+        while (p < len(aux_tablero)):
+            a = aux_tablero[p]
+            if(aux_tablero[p][2] == indice+1 and aux_tablero[p][1] == aux_tablero[i][1] ): #se agrrega si esta en misma fila y misma columna
+                a = aux_tablero[i][0]
+                listaBlancas.append(aux_tablero[i][0])#sigue agregando blancas que esten juntas
+                indice+=1
+            else:
+                break
+            p += 1
+
+        #print(listaBlancas)
+        combinacionesF.append(productoCartesiano(listaBlancas))#resultado de combinaciones posibles para fila 
+        i = p #avanzar a siguiente lista de blancas
+    return combinacionesF
+
+#resolver cuando se borran
+# matriz blanca queden valores que no se repitan en una tupla
+def productoCartesiano(matrizBlancas):
+    #print("entra a producCartesiano")
+    listaR = []
+    for element in itertools.product(*matrizBlancas):
+        listaR.append(element)
+    print(listaR)
+    for i in range(len(listaR)):
+        flag
+        for j in range(len(listaR[0])):
+            p = len(listaR[0])
+            k = j+1
             
-           
-def backTraking(prueba, pp,suma):
+            while(k < p ):
+                if(listaR[i][j] == listaR[i][k]):
+                    listaR.remove(listaR[i])
+                    break
+        
+    return listaR
+
+
+#bkt inseta valores de matriz blanca 
+
+
+
+'''           
+def backTracking(prueba, pp,suma,casillaActual):
+    if(casillaActual == -0):
+        return
     resulta = []
     copia = pp[:]
     while copia != []:
@@ -179,8 +233,8 @@ def backTraking(prueba, pp,suma):
         else:
             del copia[0]
     del prueba[0]
-    return backTraking(prueba, pp,suma)
-
+    return backTracking(prueba, pp,suma,casillaActual-1)
+'''
 #partiendo del hecho de que tengo la union de mis tres casiilas(le paso pisibles y can casillas y la suma de la fila)
 def conjuntoPotencia():
     posibles = [1,2,3,4,5,6,7,8,9]#union
@@ -224,8 +278,8 @@ def imprimir(listaPosibles):
         print(i)   
 
 
-    
-        
+crearTablero(8,8)
+
 
                 
                 
@@ -290,62 +344,62 @@ def rand():
         cont = cont + 1
   
 def kakuro(tablero):
-    c_negra = Celda("negra","none","none","none")
-    c_blanca = Celda("blanca","none","none",0)
+    c_negra = Celda("negra",None,None,None)
+    c_blanca = Celda("blanca",None,None,0)
     
     tablero [0] = c_negra
-    tablero [1] = Celda("negra","none",3, "none")
-    tablero [2] = Celda("negra","none",20, "none") 
-    tablero [3] = Celda("negra","none","none", "none")   
-    tablero [4] = Celda("negra","none",10, "none")
-    tablero [5] = Celda("negra","none",12, "none")
-    tablero [6] = Celda("negra","none",3, "none")
+    tablero [1] = Celda("negra",None,3, None)
+    tablero [2] = Celda("negra",None,20, None) 
+    tablero [3] = Celda("negra",None,None, None)   
+    tablero [4] = Celda("negra",None,10, None)
+    tablero [5] = Celda("negra",None,12, None)
+    tablero [6] = Celda("negra",None,3, None)
     tablero [7] = c_negra
-    tablero [8] = Celda("negra", 9, "none", "none")
+    tablero [8] = Celda("negra", 9, None, None)
     tablero [9] = c_blanca
     tablero [10] = c_blanca
-    tablero [11] = Celda("negra",13,"none", "none")
+    tablero [11] = Celda("negra",13,None, None)
     tablero [12] = c_blanca
     tablero [13] = c_blanca
     tablero [14] = c_blanca
     tablero [15] = c_negra
-    tablero [16] = Celda("negra",11,"none", "none")
+    tablero [16] = Celda("negra",11,None, None)
     tablero [17] = c_blanca
     tablero [18] = c_blanca
-    tablero [19] = Celda("negra",6,15, "none")
+    tablero [19] = Celda("negra",6,15, None)
     tablero [20] = c_blanca
     tablero [21] = c_blanca
     tablero [22] = c_blanca
     tablero [23] = c_negra
     tablero [24] = c_negra
-    tablero [25] = Celda("negra",6,"none", "none")
+    tablero [25] = Celda("negra",6,None, None)
     tablero [26] = c_blanca
     tablero [27] = c_blanca
     tablero [28] = c_blanca
-    tablero [29] = Celda("negra","none",13, "none")
+    tablero [29] = Celda("negra",None,13, None)
     tablero [30] = c_negra
     tablero [31] = c_negra
     tablero [32] = c_negra
-    tablero [33] = Celda("negra","none",12, "none")
-    tablero [34] = Celda("negra",31,4, "none")
+    tablero [33] = Celda("negra",None,12, None)
+    tablero [34] = Celda("negra",31,4, None)
     tablero [35] = c_blanca
     tablero [36] = c_blanca
     tablero [37] = c_blanca
-    tablero [38] = Celda("negra","none",3, "none")
+    tablero [38] = Celda("negra",None,3, None)
     tablero [39] = c_negra
-    tablero [40] = Celda("negra",6,"none", "none")
+    tablero [40] = Celda("negra",6,None, None)
     tablero [41] = c_blanca
     tablero [42] = c_blanca
     tablero [43] = c_blanca
-    tablero [44] = Celda("negra",4,"none", "none")
+    tablero [44] = Celda("negra",4,None, None)
     tablero [45] = c_blanca
     tablero [46] = c_blanca
     tablero [47] = c_negra
-    tablero [48] = Celda("negra",16,"none", "none")
+    tablero [48] = Celda("negra",16,None, None)
     tablero [49] = c_blanca
     tablero [50] = c_blanca
     tablero [51] = c_blanca
-    tablero [52] = Celda("negra",3,"none", "none")
+    tablero [52] = Celda("negra",3,None, None)
     tablero [53] = c_blanca
     tablero [54] = c_blanca
     tablero [55] = c_negra
@@ -420,7 +474,7 @@ def crearListaPosibles(rango):
 
 
 
-def backTraking(prueba, pp):
+def backTracking(prueba, pp):
     resulta = []
     copia = pp
     suma = 9
@@ -435,7 +489,7 @@ def backTraking(prueba, pp):
             del copia[0]
             print("lista recortada: " + str(copia))
     del prueba[0]
-    return backTraking(prueba, pp)
+    return backTracking(prueba, pp)
 
 
     
