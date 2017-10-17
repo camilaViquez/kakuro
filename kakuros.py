@@ -344,14 +344,11 @@ def rand():
         cont = cont + 1
   
 def kakuro(tablero):
-<<<<<<< HEAD
-    c_negra = Celda("negra","none","none","none")
-    c_blanca = Celda("blanca","none","none",0)
-=======
+
     c_negra = Celda("negra",None,None,None)
     c_blanca = Celda("blanca",None,None,0)
     
->>>>>>> develop
+
     tablero [0] = c_negra
     tablero [1] = Celda("negra",None,3, None)
     tablero [2] = Celda("negra",None,20, None) 
@@ -416,30 +413,14 @@ def kakuro(tablero):
     tablero [61] = c_negra
     tablero [62] = c_negra
     tablero [63] = c_negra
-<<<<<<< HEAD
-    print tablero
-=======
     print (tablero)
-    
-    
->>>>>>> develop
-    
-    print ("Color tablero en posicion 1: " + str(tablero[1].color))
-    
 
-<<<<<<< HEAD
-    
 def imprimirKakuro(tablero):
     cont = 0
     for i in tablero:
         for j in i:
             ptint (tablero)
-            
-    
-   
-=======
-      
->>>>>>> develop
+
 def recorrerTablero(tablero):
     print("recorrer tablero entra")
     casillaJuego = 9
