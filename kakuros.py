@@ -2,7 +2,7 @@ from itertools import combinations, permutations
 import random
 import itertools
 
-
+termine=False
 
 def crearTablero (fila,columna):
     listCasillas = []
@@ -148,8 +148,6 @@ def crearListaPosibles(rango):
         return lista
     
 def listaPermutaciones(aux_tablero,tablero):
-    fila = len(tablero)
-    #print(aux_tablero)
     combinacionesF = []
     i = 0
     while(i < len(aux_tablero)):
@@ -171,9 +169,6 @@ def listaPermutaciones(aux_tablero,tablero):
         pCartesiano = productoCartesiano(listaBlancas,aux_tablero[i][3]) #enviamos lo que debe sumar en fila[3]
         combinacionesF.append(pCartesiano)#resultado de combinaciones posibles para fila 
         i = p #avanzar a siguiente lista de blancas
-    #for i in (range(0,len(combinacionesF))):
-     #   print (len(combinacionesF[i]))
-        
     return combinacionesF
 
 
@@ -197,7 +192,6 @@ def productoCartesiano(matrizBlancas,suma):
                         flag = False #si borro una tupla igual
                         break 
                     k+=1
-                  
             else:
                 #si no sumalo que debe tambien se quita
                 listaR.remove(listaR[i])
@@ -208,7 +202,6 @@ def productoCartesiano(matrizBlancas,suma):
                 break
         if(flag):
             i += 1
-    a = listaR
     return listaR
 def auxProdCartesiano(matriz):
     listaR = []
@@ -229,36 +222,51 @@ def verificarSuma(listaFila,suma):
 def backTracking(combinaciones,aux_tablero,tablero):
     nuevoTablero = getNewTablero(tablero)
     listaCombinaciones=auxProdCartesiano(combinaciones)
-    for i in range(len(listaCombinaciones)):
+    print(listaCombinaciones[86490])
+    #Evalua las combinaciones
+    for i in range(0,len(listaCombinaciones)):
         nuevoTablero = getNewTablero(tablero)
-        resultado = pobblarTablero(nuevoTablero, listaCombinaciones[i])
-        if(resultado[0] == True):
+        resultado = poblarTablero(nuevoTablero, listaCombinaciones[i])
+        if resultado[0]:
             nuevoTablero = resultado[1]
+            break
     return nuevoTablero
 
         
 
-def pobblarTablero(nuevoTablero,combinaciones): #combinaciones es solo los numeros que se van a usar
-    a=combinaciones
-    cont =0
+def poblarTablero(nuevoTablero,combinaciones): #combinaciones es solo los numeros que se van a usar
+    cont =0  
     sumaValida=True
+    #Este pobla el tablero
     for i in range(len(nuevoTablero)):
         j = 0
         while j < len(nuevoTablero[i]):
             if(nuevoTablero[i][j][1] == True and nuevoTablero[i][j][0] > -1):
                 nuevoTablero = ingresarValor(nuevoTablero,combinaciones[cont],i,j)
-                #printMatriz(ingresar )
                 j += len(combinaciones[cont])
                 cont+=1
-                esValid=sumaColumna(i,j,nuevoTablero[i][j-1][1],nuevoTablero)
+            else:
+                j +=1
+
+    #Este evalua el tablero
+    cont=0
+    for i in range(len(nuevoTablero)):
+        j = 0
+        while j < len(nuevoTablero[i]):
+            if(nuevoTablero[i][j][1] == True and nuevoTablero[i][j][0] > -1):
+                cont+=1
+                if(nuevoTablero[i-1][j][1]==False):#Evalua si el que esta arriba es una casilla negra de columna
+                    esValid=sumaColumna(i,j,nuevoTablero[i-1][j][0],nuevoTablero)#Esto lo saca siempre
                 if not esValid:
                     sumaValida=False
                     break
-            else:
-                j +=1
+            j +=1
         if not sumaValida:
+            nuevoTablero=0
             break
-    return [sumaValida, nuevoTablero]
+
+    result=[sumaValida,nuevoTablero]
+    return result
 
 #pone las convinaciones en en tablero, donde estan los espacios en blanco
 def ingresarValor(nuevoTablero,lista,i,j):
@@ -269,7 +277,6 @@ def ingresarValor(nuevoTablero,lista,i,j):
 
 def sumaColumna(i,j,valor,nuevotablero):#i fila, j columna
     suma = 0
-    i+=1
     for n in range(i,len(nuevotablero)):
         # si en la columna se acaban las blancas no sigue evaluando
         if(nuevotablero[n][j][1] == False):
@@ -301,7 +308,6 @@ def getNewTablero(tablero):
                 listaElemFila =[0,True] #cero valor de casilla blanca
             listaFila.append(listaElemFila)
         matrizEvaluada.append(listaFila)
-   # printMatriz(matrizEvaluada)
     return matrizEvaluada
 
 
@@ -327,7 +333,6 @@ def probarListas(prueba, listaFila,suma):
     while copia != []:
         for i in range(len(listaFila)):
             sumaPrueba += listaFila[i]
-
         if(prueba[0] + copia[0] == suma):
             resulta.append(prueba[0])
             resulta.append(copia[0])
@@ -338,3 +343,4 @@ def probarListas(prueba, listaFila,suma):
     return backTracking(prueba, listaFila,suma)
 
 crearTablero(8,8)
+
